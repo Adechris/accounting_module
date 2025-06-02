@@ -13,6 +13,11 @@ import billRoutes from './routes/billRoutes.js';
 import paymentRoutes from './routes/paymentRoutes.js';
 import expenseRoutes from './routes/expenseRoutes.js';
 import payrollRoutes from './routes/payrollRoutes.js';
+import budgetRoutes from './routes/budgetRoutes.js';
+import assetRoutes from './routes/assetRoutes.js';
+import departmentRoutes from './routes/departmentRoutes.js';
+
+
 
 dotenv.config();
 
@@ -41,6 +46,12 @@ app.use('/api/bills', billRoutes);
 app.use('/api/payments', paymentRoutes);
 app.use('/api/expenses', expenseRoutes);
 app.use('/api/payroll', payrollRoutes);
+app.use('/api/budgets', budgetRoutes);
+app.use('/api/assets', assetRoutes);
+app.use('/api/departments', departmentRoutes);
+
+
+
 
 // Start server
 app.listen(PORT, () => {

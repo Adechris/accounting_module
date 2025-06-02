@@ -1,142 +1,15 @@
- 
-
-
-
-
-
-// import React from 'react';
-// import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-// import { AuthProvider } from './contexts/AuthContext';
-
-// import Login from './components/Auth/Login';
-// import Register from './components/Auth/Register';
-// import ChangePassword from './components/Auth/ChangePassword';
-// import Dashboard from './components/Dashboard/Dashboard';
-
-// import EmployeeList from './components/Employees/EmployeeList';
-// import AddEmployee from './components/Employees/AddEmployee';
-// import EditEmployee from './components/Employees/EditEmployee';
-
-// import AttendanceList from './components/Attendance/AttendanceList';
-// import ClockInOut from './components/Attendance/ClockInOut';
-// import AddAttendance from './components/Attendance/AddAttendance';
-
-// import AccountList from './components/Accounts/AccountList';
-// import AddAccount from './components/Accounts/AddAccount';
-// import EditAccount from './components/Accounts/EditAccount';
-
-// import JournalEntryList from './components/JournalEntries/JournalEntryList';
-// import AddJournalEntry from './components/JournalEntries/AddJournalEntry';
-// import JournalEntryDetails from './components/JournalEntries/JournalEntryDetails';
-
-// import CustomerList from './components/Customers/CustomerList';
-// import AddCustomer from './components/Customers/AddCustomer';
-// import EditCustomer from './components/Customers/EditCustomer';
-
-// import SupplierList from './components/Suppliers/SupplierList';
-// import AddSupplier from './components/Suppliers/AddSupplier';
-// import EditSupplier from './components/Suppliers/EditSupplier';
-
-// import InvoiceList from './components/Invoices/InvoiceList';
-// import AddInvoice from './components/Invoices/AddInvoice';
-// import InvoiceDetails from './components/Invoices/InvoiceDetails';
-// import EditInvoiceStatus from './components/Invoices/EditInvoiceStatus';
-
-// import BillList from './components/Bills/BillList';
-// import AddBill from './components/Bills/AddBill';
-// import BillDetails from './components/Bills/BillDetails';
-// import ApproveBill from './components/Bills/ApproveBill';
-
-// import PaymentList from './components/Payments/PaymentList';
-// import AddPayment from './components/Payments/AddPayment';
-
-// import ExpenseList from './components/Expenses/ExpenseList';
-// import AddExpense from './components/Expenses/AddExpense';
-// import ApproveExpense from './components/Expenses/ApproveExpense';
-
-// import PayrollList from './components/Payroll/PayrollList';
-// import AddPayroll from './components/Payroll/AddPayroll';
-// // import ProcessPayroll from './components/Payroll/ProcessPayroll';
-
-// import Header from './components/Layout/Header';
-// // import Footer from './components/Layout/Footer';
-
-// import 'bootstrap/dist/css/bootstrap.min.css';
-
-// const App = () => {
-//   return (
-//     <Router>
-//       <AuthProvider>
-//         <Header />
-//         <Routes>
-//           <Route path="/" element={<Login />} />
-//           <Route path="/login" element={<Login />} />
-//           <Route path="/register" element={<Register />} />
-//           <Route path="/change-password" element={<ChangePassword />} />
-//           <Route path="/dashboard" element={<Dashboard />} />
-
-//           <Route path="/employees" element={<EmployeeList />} />
-//           <Route path="/add-employee" element={<AddEmployee />} />
-//           <Route path="/edit-employee/:id" element={<EditEmployee />} />
-
-//           <Route path="/attendance" element={<AttendanceList />} />
-//           <Route path="/clock" element={<ClockInOut />} />
-//           <Route path="/add-attendance" element={<AddAttendance />} />
-
-//           <Route path="/accounts" element={<AccountList />} />
-//           <Route path="/add-account" element={<AddAccount />} />
-//           <Route path="/edit-account/:id" element={<EditAccount />} />
-
-//           <Route path="/journal-entries" element={<JournalEntryList />} />
-//           <Route path="/add-journal-entry" element={<AddJournalEntry />} />
-//           <Route path="/journal-entry/:id" element={<JournalEntryDetails />} />
-
-//           <Route path="/customers" element={<CustomerList />} />
-//           <Route path="/add-customer" element={<AddCustomer />} />
-//           <Route path="/edit-customer/:id" element={<EditCustomer />} />
-
-//           <Route path="/suppliers" element={<SupplierList />} />
-//           <Route path="/add-supplier" element={<AddSupplier />} />
-//           <Route path="/edit-supplier/:id" element={<EditSupplier />} />
-
-//           <Route path="/invoices" element={<InvoiceList />} />
-//           <Route path="/add-invoice" element={<AddInvoice />} />
-//           <Route path="/invoice/:id" element={<InvoiceDetails />} />
-//           <Route path="/edit-invoice-status/:id" element={<EditInvoiceStatus />} />
-
-//           <Route path="/bills" element={<BillList />} />
-//           <Route path="/add-bill" element={<AddBill />} />
-//           <Route path="/bill/:id" element={<BillDetails />} />
-//           <Route path="/approve-bill/:id" element={<ApproveBill />} />
-
-//           <Route path="/payments" element={<PaymentList />} />
-//           <Route path="/add-payment" element={<AddPayment />} />
-
-//           <Route path="/expenses" element={<ExpenseList />} />
-//           <Route path="/add-expense" element={<AddExpense />} />
-//           <Route path="/approve-expense/:id" element={<ApproveExpense />} />
-
-//           <Route path="/payroll" element={<PayrollList />} />
-//           <Route path="/add-payroll" element={<AddPayroll />} />
-//           {/* <Route path="/process-payroll/:id" element={<ProcessPayroll />} /> */}
-//         </Routes>
-//         {/* <Footer /> */}
-//       </AuthProvider>
-//     </Router>
-//   );
-// };
-
-// export default App;
-
-
-
-
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './contexts/AuthContext';
 
+// Route Protection Components
+import ProtectedRoute from './components/Auth/ProtectedRoute';
+import PublicRoute from './components/Auth/PublicRoute';
+
 import Login from './components/Auth/Login';
 import Register from './components/Auth/Register';
+import ForgotPassword from './components/Auth/ForgotPassword';
+import ResetPassword from './components/Auth/ResetPassword';
 import ChangePassword from './components/Auth/ChangePassword';
 import Dashboard from './components/Dashboard/Dashboard';
 
@@ -181,10 +54,22 @@ import ExpenseList from './components/Expenses/ExpenseList';
 import AddExpense from './components/Expenses/AddExpense';
 import ApproveExpense from './components/Expenses/ApproveExpense';
 
+import AssetList from './components/Assets/AssetList';
+import AddAsset from './components/Assets/AddAsset';
+import EditAsset from './components/Assets/EditAsset';
+
+
+import DepartmentList from './components/Department/DepartmentList';
+import AddDepartment from './components/Department/AddDepartment';
+import EditDepartment from './components/Department/EditDepartment';
+
 import PayrollList from './components/Payroll/PayrollList';
 import AddPayroll from './components/Payroll/AddPayroll';
 
 import DashboardLayout from './components/Layout/DashboardLayout';
+
+
+import Error from './components/ErrorPage/Error';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -193,58 +78,75 @@ const App = () => {
     <Router>
       <AuthProvider>
         <Routes>
-          {/* Auth routes without layout */}
-          <Route path="/" element={<Login />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/change-password" element={<ChangePassword />} />
+          {/* Public routes - redirect to dashboard if already logged in */}
+          <Route path="/" element={<PublicRoute><Login /></PublicRoute>} />
+          <Route path="/login" element={<PublicRoute><Login /></PublicRoute>} />
+          <Route path="/register" element={<PublicRoute><Register /></PublicRoute>} />
+          <Route path="/forgot-password" element={<PublicRoute><ForgotPassword /></PublicRoute>} />
+          <Route path="/reset-password/:token" element={<PublicRoute><ResetPassword /></PublicRoute>} />
           
-          {/* All dashboard routes with layout */}
-          <Route path="/dashboard" element={<DashboardLayout><Dashboard /></DashboardLayout>} />
+          {/* Semi-protected route - change password can be accessed by logged in users */}
+          <Route path="/change-password" element={<ProtectedRoute><ChangePassword /></ProtectedRoute>} />
           
-          <Route path="/employees" element={<DashboardLayout><EmployeeList /></DashboardLayout>} />
-          <Route path="/add-employee" element={<DashboardLayout><AddEmployee /></DashboardLayout>} />
-          <Route path="/edit-employee/:id" element={<DashboardLayout><EditEmployee /></DashboardLayout>} />
+          {/* All dashboard routes - require authentication */}
+          <Route path="/dashboard" element={<ProtectedRoute><DashboardLayout><Dashboard /></DashboardLayout></ProtectedRoute>} />
+          
+          <Route path="/employees" element={<ProtectedRoute><DashboardLayout><EmployeeList /></DashboardLayout></ProtectedRoute>} />
+          <Route path="/add-employee" element={<ProtectedRoute><DashboardLayout><AddEmployee /></DashboardLayout></ProtectedRoute>} />
+          <Route path="/edit-employee/:id" element={<ProtectedRoute><DashboardLayout><EditEmployee /></DashboardLayout></ProtectedRoute>} />
 
-          <Route path="/attendance" element={<DashboardLayout><AttendanceList /></DashboardLayout>} />
-          <Route path="/clock" element={<DashboardLayout><ClockInOut /></DashboardLayout>} />
-          <Route path="/add-attendance" element={<DashboardLayout><AddAttendance /></DashboardLayout>} />
+          <Route path="/attendance" element={<ProtectedRoute><DashboardLayout><AttendanceList /></DashboardLayout></ProtectedRoute>} />
+          <Route path="/clock" element={<ProtectedRoute><DashboardLayout><ClockInOut /></DashboardLayout></ProtectedRoute>} />
+          <Route path="/add-attendance" element={<ProtectedRoute><DashboardLayout><AddAttendance /></DashboardLayout></ProtectedRoute>} />
 
-          <Route path="/accounts" element={<DashboardLayout><AccountList /></DashboardLayout>} />
-          <Route path="/add-account" element={<DashboardLayout><AddAccount /></DashboardLayout>} />
-          <Route path="/edit-account/:id" element={<DashboardLayout><EditAccount /></DashboardLayout>} />
+          <Route path="/accounts" element={<ProtectedRoute><DashboardLayout><AccountList /></DashboardLayout></ProtectedRoute>} />
+          <Route path="/add-account" element={<ProtectedRoute><DashboardLayout><AddAccount /></DashboardLayout></ProtectedRoute>} />
+          <Route path="/edit-account/:id" element={<ProtectedRoute><DashboardLayout><EditAccount /></DashboardLayout></ProtectedRoute>} />
 
-          <Route path="/journal-entries" element={<DashboardLayout><JournalEntryList /></DashboardLayout>} />
-          <Route path="/add-journal-entry" element={<DashboardLayout><AddJournalEntry /></DashboardLayout>} />
-          <Route path="/journal-entry/:id" element={<DashboardLayout><JournalEntryDetails /></DashboardLayout>} />
+          <Route path="/journal-entries" element={<ProtectedRoute><DashboardLayout><JournalEntryList /></DashboardLayout></ProtectedRoute>} />
+          <Route path="/add-journal-entry" element={<ProtectedRoute><DashboardLayout><AddJournalEntry /></DashboardLayout></ProtectedRoute>} />
+          <Route path="/journal-entry/:id" element={<ProtectedRoute><DashboardLayout><JournalEntryDetails /></DashboardLayout></ProtectedRoute>} />
 
-          <Route path="/customers" element={<DashboardLayout><CustomerList /></DashboardLayout>} />
-          <Route path="/add-customer" element={<DashboardLayout><AddCustomer /></DashboardLayout>} />
-          <Route path="/edit-customer/:id" element={<DashboardLayout><EditCustomer /></DashboardLayout>} />
+          <Route path="/customers" element={<ProtectedRoute><DashboardLayout><CustomerList /></DashboardLayout></ProtectedRoute>} />
+          <Route path="/add-customer" element={<ProtectedRoute><DashboardLayout><AddCustomer /></DashboardLayout></ProtectedRoute>} />
+          <Route path="/edit-customer/:id" element={<ProtectedRoute><DashboardLayout><EditCustomer /></DashboardLayout></ProtectedRoute>} />
 
-          <Route path="/suppliers" element={<DashboardLayout><SupplierList /></DashboardLayout>} />
-          <Route path="/add-supplier" element={<DashboardLayout><AddSupplier /></DashboardLayout>} />
-          <Route path="/edit-supplier/:id" element={<DashboardLayout><EditSupplier /></DashboardLayout>} />
+          <Route path="/suppliers" element={<ProtectedRoute><DashboardLayout><SupplierList /></DashboardLayout></ProtectedRoute>} />
+          <Route path="/add-supplier" element={<ProtectedRoute><DashboardLayout><AddSupplier /></DashboardLayout></ProtectedRoute>} />
+          <Route path="/edit-supplier/:id" element={<ProtectedRoute><DashboardLayout><EditSupplier /></DashboardLayout></ProtectedRoute>} />
 
-          <Route path="/invoices" element={<DashboardLayout><InvoiceList /></DashboardLayout>} />
-          <Route path="/add-invoice" element={<DashboardLayout><AddInvoice /></DashboardLayout>} />
-          <Route path="/invoice/:id" element={<DashboardLayout><InvoiceDetails /></DashboardLayout>} />
-          <Route path="/edit-invoice-status/:id" element={<DashboardLayout><EditInvoiceStatus /></DashboardLayout>} />
+          <Route path="/invoices" element={<ProtectedRoute><DashboardLayout><InvoiceList /></DashboardLayout></ProtectedRoute>} />
+          <Route path="/add-invoice" element={<ProtectedRoute><DashboardLayout><AddInvoice /></DashboardLayout></ProtectedRoute>} />
+          <Route path="/invoice/:id" element={<ProtectedRoute><DashboardLayout><InvoiceDetails /></DashboardLayout></ProtectedRoute>} />
+          <Route path="/edit-invoice-status/:id" element={<ProtectedRoute><DashboardLayout><EditInvoiceStatus /></DashboardLayout></ProtectedRoute>} />
 
-          <Route path="/bills" element={<DashboardLayout><BillList /></DashboardLayout>} />
-          <Route path="/add-bill" element={<DashboardLayout><AddBill /></DashboardLayout>} />
-          <Route path="/bill/:id" element={<DashboardLayout><BillDetails /></DashboardLayout>} />
-          <Route path="/approve-bill/:id" element={<DashboardLayout><ApproveBill /></DashboardLayout>} />
+          <Route path="/bills" element={<ProtectedRoute><DashboardLayout><BillList /></DashboardLayout></ProtectedRoute>} />
+          <Route path="/add-bill" element={<ProtectedRoute><DashboardLayout><AddBill /></DashboardLayout></ProtectedRoute>} />
+          <Route path="/bill/:id" element={<ProtectedRoute><DashboardLayout><BillDetails /></DashboardLayout></ProtectedRoute>} />
+          <Route path="/approve-bill/:id" element={<ProtectedRoute><DashboardLayout><ApproveBill /></DashboardLayout></ProtectedRoute>} />
 
-          <Route path="/payments" element={<DashboardLayout><PaymentList /></DashboardLayout>} />
-          <Route path="/add-payment" element={<DashboardLayout><AddPayment /></DashboardLayout>} />
+          <Route path="/payments" element={<ProtectedRoute><DashboardLayout><PaymentList /></DashboardLayout></ProtectedRoute>} />
+          <Route path="/add-payment" element={<ProtectedRoute><DashboardLayout><AddPayment /></DashboardLayout></ProtectedRoute>} />
 
-          <Route path="/expenses" element={<DashboardLayout><ExpenseList /></DashboardLayout>} />
-          <Route path="/add-expense" element={<DashboardLayout><AddExpense /></DashboardLayout>} />
-          <Route path="/approve-expense/:id" element={<DashboardLayout><ApproveExpense /></DashboardLayout>} />
+          <Route path="/expenses" element={<ProtectedRoute><DashboardLayout><ExpenseList /></DashboardLayout></ProtectedRoute>} />
+          <Route path="/add-expense" element={<ProtectedRoute><DashboardLayout><AddExpense /></DashboardLayout></ProtectedRoute>} />
+          <Route path="/approve-expense/:id" element={<ProtectedRoute><DashboardLayout><ApproveExpense /></DashboardLayout></ProtectedRoute>} />
 
-          <Route path="/payroll" element={<DashboardLayout><PayrollList /></DashboardLayout>} />
-          <Route path="/add-payroll" element={<DashboardLayout><AddPayroll /></DashboardLayout>} />
+          <Route path="/payroll" element={<ProtectedRoute><DashboardLayout><PayrollList /></DashboardLayout></ProtectedRoute>} />
+          <Route path="/add-payroll" element={<ProtectedRoute><DashboardLayout><AddPayroll /></DashboardLayout></ProtectedRoute>} />
+
+
+          <Route path="/assets" element={<ProtectedRoute><DashboardLayout><AssetList /></DashboardLayout></ProtectedRoute>} />
+          <Route path="/add-asset" element={<ProtectedRoute><DashboardLayout><AddAsset /></DashboardLayout></ProtectedRoute>} />
+          <Route path="/edit-asset/:id" element={<ProtectedRoute><DashboardLayout><EditAsset /></DashboardLayout></ProtectedRoute>} />
+          {/* Add more routes as needed */}
+
+          <Route path="/departments" element={<ProtectedRoute><DashboardLayout><DepartmentList /></DashboardLayout></ProtectedRoute>} />
+          <Route path="/add-department" element={<ProtectedRoute><DashboardLayout><AddDepartment /></DashboardLayout></ProtectedRoute>} />
+          <Route path="/edit-department/:id" element={<ProtectedRoute><DashboardLayout><EditDepartment /></DashboardLayout></ProtectedRoute>} />
+          
+          {/* Fallback route for 404 - can be a NotFound component */}  
+          <Route path="*" element={<ProtectedRoute><DashboardLayout><Error /></DashboardLayout></ProtectedRoute>} />
         </Routes>
       </AuthProvider>
     </Router>

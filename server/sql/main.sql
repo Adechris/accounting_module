@@ -47,6 +47,10 @@ CREATE TABLE users (
     FOREIGN KEY (employee_id) REFERENCES employees(id) ON DELETE SET NULL
 );
 
+ALTER TABLE users 
+ADD COLUMN reset_token VARCHAR(255) NULL,
+ADD COLUMN reset_token_expiry DATETIME NULL;
+
 -- 3. Chart of Accounts (Account Categories)
 CREATE TABLE chart_of_accounts (
     id INT PRIMARY KEY AUTO_INCREMENT,
@@ -380,6 +384,84 @@ CREATE TABLE audit_trail (
     ip_address VARCHAR(45),
     FOREIGN KEY (user_id) REFERENCES users(id)
 );
+
+
+-- Simplified Additional Tables for Accounting System
+
+-- 19. Departments Table
+CREATE TABLE departments (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    department_name VARCHAR(100) NOT NULL,
+    department_code VARCHAR(10) UNIQUE NOT NULL,
+    manager_id INT NULL,
+    status ENUM('active', 'inactive') DEFAULT 'active',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (manager_id) REFERENCES employees(id) ON DELETE CASCADE
+);
+
+-- 20. Notifications Table
+CREATE TABLE notifications (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    user_id INT NOT NULL,
+    title VARCHAR(200) NOT NULL,
+    message TEXT NOT NULL,
+    type ENUM('info', 'warning', 'success', 'error') DEFAULT 'info',
+    is_read BOOLEAN DEFAULT FALSE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
+
+-- 21. Budgets Table
+CREATE TABLE budgets (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    budget_name VARCHAR(100) NOT NULL,
+    department_id INT NULL,
+    account_id INT NULL,
+    period_start DATE NOT NULL,
+    period_end DATE NOT NULL,
+    budgeted_amount DECIMAL(15,2) NOT NULL,
+    actual_amount DECIMAL(15,2) DEFAULT 0,
+    status ENUM('active', 'inactive') DEFAULT 'active',
+    created_by INT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (department_id) REFERENCES departments(id) ON DELETE CASCADE,
+    FOREIGN KEY (account_id) REFERENCES chart_of_accounts(id) ON DELETE CASCADE,
+    FOREIGN KEY (created_by) REFERENCES users(id)
+);
+
+-- 22. Assets Table
+CREATE TABLE assets (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    asset_name VARCHAR(100) NOT NULL,
+    asset_tag VARCHAR(20) UNIQUE NOT NULL,
+    category ENUM('equipment', 'furniture', 'vehicle', 'software', 'other') NOT NULL,
+    purchase_date DATE NOT NULL,
+    purchase_price DECIMAL(15,2) NOT NULL,
+    current_value DECIMAL(15,2),
+    department_id INT NULL,
+    assigned_to INT NULL,
+    status ENUM('active', 'inactive', 'disposed') DEFAULT 'active',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (department_id) REFERENCES departments(id) ON DELETE CASCADE,
+    FOREIGN KEY (assigned_to) REFERENCES employees(id) ON DELETE CASCADE
+);
+
+-- Update existing employees table to reference departments
+ALTER TABLE employees 
+ADD COLUMN department_id INT NULL AFTER department,
+ADD FOREIGN KEY (department_id) REFERENCES departments(id) ON DELETE CASCADE;
+
+-- Essential indexes only
+CREATE INDEX idx_departments_manager ON departments(manager_id);
+CREATE INDEX idx_notifications_user ON notifications(user_id);
+CREATE INDEX idx_notifications_read ON notifications(is_read);
+CREATE INDEX idx_budgets_department ON budgets(department_id);
+CREATE INDEX idx_budgets_period ON budgets(period_start, period_end);
+CREATE INDEX idx_assets_department ON assets(department_id);
+CREATE INDEX idx_assets_assigned ON assets(assigned_to);
  
 -- Create Indexes for Better Performance
 CREATE INDEX idx_employees_employee_id ON employees(employee_id);
